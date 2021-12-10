@@ -7,19 +7,19 @@
     }
 
     $card_no = $_SESSION['atm_card'];
-    // $amt = mysqli_real_escape_string($conn, $_POST["amt"]);
-    // $type = mysqli_real_escape_string($conn, $_POST["type"]);
+    $amt = mysqli_real_escape_string($conn, $_POST["amt"]);
+    $type = mysqli_real_escape_string($conn, $_POST["type"]);
     $pin = $_SESSION['atm_pin'];
     $sql00 = "SELECT * from customer where card_no='".$card_no."'";
     $result00 = $conn->query($sql00);
     $row00 = $result00->fetch_assoc();
+    echo("<script>console.log('PHP: " . $sql00 . "');</script>");
     $id = $row00["cust_id"];
     $sql0 = "SELECT balance FROM passbook".$id." ORDER BY trans_id DESC LIMIT 1";
     $result = $conn->query($sql0);
     $row = $result->fetch_assoc();
     $balance = $row["balance"];
-    $f_name = $row00["first_name"];
-    $l_name = $row00["last_name"];
+
     /*  Set appropriate error number if errors are encountered.
         Key (for err_no) :
         -1 = Connection Error.
@@ -32,12 +32,11 @@
     $result_pin = $conn->query($sql_pin);
 
     if (($result_pin->num_rows) > 0) {
-        $_SESSION['atm_name'] = "$f_name $l_name";
-        $_SESSION['atm_card'] = $card_no;
-        $_SESSION['atm_pin'] = $pin;
-        $_SESSION['isCardValid'] = true;
-        $_SESSION['LAST_ACTIVITY'] = time();
-    //     // For Credit transactions
+        // $_SESSION['atm_name'] = $row00["first_name"]+ " "+ $row00["last_name"];
+        // $_SESSION['atm_card'] = $card_no;
+        // $_SESSION['isCardValid'] = true;
+        // $_SESSION['LAST_ACTIVITY'] = time();
+        // For Credit transactions
         if ($type == "credit") {
             $final_balance = $balance + $amt;
 
@@ -55,7 +54,7 @@
             }
         }
 
-       # For Debit transactions
+     #   For Debit transactions
         if ($type == "debit") {
             $final_balance = $balance - $amt;
 
@@ -102,7 +101,7 @@
             <?php
             if ($err_no == 0) { ?>
                 <p id="info"><?php 
-                header("location:atm_simulator_out_1.php")
+                echo "Transaction Successful"
                 ?></p>
             <?php } ?>
 
@@ -118,7 +117,7 @@
         </div>
 
         <div class="flex-item">
-            <a href="atm_simulator_out.php" class="button">Go Back</a>
+            <a href="atm_simulator_out_1.php" class="button">Go Back</a>
         </div>
     </div>
 

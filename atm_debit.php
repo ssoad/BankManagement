@@ -11,25 +11,20 @@
 </head>
 
 <body>
-    <form class="add_customer_form" action="atm_simulator_out_action.php" method="post">
+    <form class="add_customer_form" action="atm_simulator_out_action_1.php" method="post">
         <div class="flex-container-form_header">
             <h1 id="form_header">ATM Simulator</h1>
         </div>
 
 
-        <div class="flex-container">
-            <div class=container>
-                <label>Enter Card Number :</label><br>
-                <input name="card_no" size="24" type="text" required />
-            </div>
-        </div>
+        <input type="hidden" id="type" name="type" value="debit">
 
-        <!-- <div class="flex-container">
+        <div class="flex-container">
             <div class=container>
                 <label>Enter Amount (in BDT) :</label><br>
                 <input name="amt" size="24" type="text" required />
             </div>
-        </div> -->
+        </div>
 
         <!-- <div class="flex-container">
             <div class=container>
@@ -47,12 +42,7 @@
             </div>
         </div> -->
 
-        <div class="flex-container">
-            <div  class=container>
-                <label>PIN(4 digit) :</b></label><br>
-                <input name="pin" size="12" type="password" required />
-            </div>
-        </div>
+        
 
         <div class="flex-container">
             <div class="container">
