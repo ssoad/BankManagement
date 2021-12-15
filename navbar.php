@@ -16,7 +16,7 @@
         <a href="customer_add_1.php">CREATE ACCOUNT</a>
         <a>ACCOUNT CREATION GUIDELINE</a>
         <a>CASH DELIVERY PROCEDURE</a>
-        <a href="atm_simulator_out.php">ATM SIMULATOR</a>
+        <a href="atm_simulator_initial.php">ATM SIMULATOR</a>
 
         <a href="javascript:void(0);" class="icon" onclick="respFunc()">&#9776;</a>
     </div>
