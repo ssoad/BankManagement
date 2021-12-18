@@ -1,31 +1,12 @@
 <?php
-    include "validate_admin.php";
+    
     include "connect.php";
     include "header.php";
-    include "user_navbar.php";
-    include "admin_sidebar.php";
     include "session_timeout.php";
-
-    if (isset($_POST['submit'])) {
-        $back_button = TRUE;
-        $search = $_POST['search'];
-        $by = $_POST['by'];
-
-        if ($by == "name") {
-            $sql0 = "SELECT cust_id, first_name, last_name, account_no, card_lock FROM customer
-            WHERE first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%'
-            OR CONCAT(first_name, ' ', last_name) LIKE '%".$search."%'";
-        }
-        else {
-            $sql0 = "SELECT cust_id, first_name, last_name, account_no FROM customer
-            WHERE account_no LIKE '$search'";
-        }
-    }
-    else {
-        $back_button = FALSE;
-
-        $sql0 = "SELECT cust_id, first_name, last_name, account_no, approved, card_lock FROM customer";
-    }
+    include "deliveryman_sidebar.php";
+    session_start();
+    $id = $_SESSION['loggedIn_deli_id'];
+    $sql0 = "SELECT * FROM `delivery` WHERE `deli_id`= '".$id."' AND NOT job_status = 2  ";
 ?>
 
 <!DOCTYPE html>
@@ -80,10 +61,20 @@
                         <p id="id"><?php echo $i . "."; ?></p>
                     </div>
                     <div class="flex-item-2">
-                        <p id="name"><?php echo $row["first_name"] . " " . $row["last_name"]; ?></p>
-                        <p id="acno"><?php echo "Ac/No : " . $row["account_no"]; 
-                         if ($row["approved"]==0) {
-                            echo " ( Not Approved )";
+                        <p id="name"><?php
+                        $sql = "SELECT * FROM `customer` WHERE `cust_id`= '".$row['cus_id']."' ";
+                        $result1 = $conn->query($sql);
+                        $row00 = $result1->fetch_assoc();
+                        echo $row00["first_name"] . " " . $row00["last_name"]; 
+                        ?>  
+                        </p>
+                        <p id="acno"><?php 
+                         echo "Phone : " . $row00["phone_no"];
+                        echo "<br>Address : " . $row["address"]; 
+                         if ($row["job_status"]==0) {
+                            echo " ( Pending )";
+                        }else if($row["job_status"]==2){
+                            echo " ( Completed )";
                         }
                         ?></p>
                     </div>
@@ -95,19 +86,18 @@
                           <button onclick="dropdown_func(<?php echo $i ?>)" class="dropbtn"></button>
                           <div id="dropdown<?php echo $i ?>" class="dropdown-content">
                             <!--Pass the customer trans_id as a get variable in the link-->
-                            <a href="edit_customer.php?cust_id=<?php echo $row["cust_id"] ?>">View / Edit</a>
-                            <a href="transactions.php?cust_id=<?php echo $row["cust_id"] ?>">Transactions</a>
+                           
 
                             <?php
-                                    if ($row["approved"]==0) {?>
-                                <a href="approve_customer.php?cust_id=<?php echo $row["cust_id"] ?>"
-                                 onclick="return confirm('Are you sure?')">Approve</a>
+                                    if ($row["job_status"]==0) {?>
+                                <a href="confirm_delivery.php?deli_id=<?php echo $row["id"] ?>"
+                                 onclick="return confirm('Are you sure?')">Confirm</a>
                             <?php } ?>
 
                             <?php
-                                    if ($row["card_lock"]==1) {?>
-                                <a href="card_unlock_customer.php?cust_id=<?php echo $row["cust_id"] ?>"
-                                 onclick="return confirm('Are you sure?')">Card Unlock</a>
+                                    if ($row["job_status"]==1) {?>
+                                <a href="complete_delivery.php?deli_id=<?php echo $row["id"] ?>"
+                                 onclick="return confirm('Are you sure?')">Complete</a>
                             <?php } ?>
                                  
                             <a href="delete_customer.php?cust_id=<?php echo $row["cust_id"] ?>"
@@ -121,13 +111,7 @@
             } else {  ?>
                 <p id="none"> No results found :(</p>
             <?php }
-            if ($back_button) { ?>
-                <div class="flex-container-bb">
-                    <div class="back_button">
-                        <a href="/manage_customers.php" class="button">Go Back</a>
-                    </div>
-                </div>
-            <?php }
+            
             $conn->close(); ?>
     </div>
 

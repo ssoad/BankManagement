@@ -12,9 +12,12 @@
 
     $sql0 =  "SELECT * FROM customer WHERE uname='".$uname."' AND pwd='".$pwd."'";
     $sql1 =  "SELECT * FROM admin WHERE uname='".$uname."' AND pwd='".$pwd."'";
+    $sql2 =  "SELECT * FROM `deliveryman` WHERE uname='".$uname."' AND pwd='".$pwd."'";
     $result = $conn->query($sql0);
     $result1 = $conn->query($sql1);
+    $result2 = $conn->query($sql2);
     $row = $result->fetch_assoc();
+    $row1 = $result2->fetch_assoc();
 
     if (($result->num_rows) > 0) {
         $approved = $row["approved"];
@@ -27,6 +30,14 @@
             session_destroy();
             die(header("location:home.php?notApproved=true"));
         }
+        
+    }
+    else if (($result2->num_rows) > 0) {
+       
+            $_SESSION['loggedIn_deli_id'] = $row1["id"];
+            $_SESSION['isDeliValid'] = true;
+            $_SESSION['LAST_ACTIVITY'] = time();
+            header("location:deliveryman_home.php");
         
     }
     else if (($result1->num_rows) > 0) {

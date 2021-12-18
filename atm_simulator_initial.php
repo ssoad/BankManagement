@@ -1,8 +1,6 @@
 <?php
     include "header.php";
     include "navbar.php";
-    include "connect.php";
-    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -13,20 +11,25 @@
 </head>
 
 <body>
-    <form class="add_customer_form" action="atm_simulator_out_action_1.php" method="post">
+    <form class="add_customer_form" action="atm_simulator_initial_action.php" method="post">
         <div class="flex-container-form_header">
             <h1 id="form_header">ATM Simulator</h1>
         </div>
 
 
-       
-
-         <div class="flex-container">
+        <div class="flex-container">
             <div class=container>
-                <center><h2>Welcome <?php echo $_SESSION['atm_name']; ?></h3><br></center>
-                <!-- <input name="amt" size="24" type="text" required /> -->
+                <label>Enter Card Number :</label><br>
+                <input name="card_no" size="24" type="text" required />
             </div>
         </div>
+
+        <!-- <div class="flex-container">
+            <div class=container>
+                <label>Enter Amount (in BDT) :</label><br>
+                <input name="amt" size="24" type="text" required />
+            </div>
+        </div> -->
 
         <!-- <div class="flex-container">
             <div class=container>
@@ -42,39 +45,26 @@
                     <label id="radio-label" for="credit-radio"><span class="radio">Add Money</span></label>
                 </div>
             </div>
-        </div>  -->
-        <br> <br>
+        </div> -->
+
+        <!-- <div class="flex-container">
+            <div  class=container>
+                <label>PIN(4 digit) :</b></label><br>
+                <input name="pin" size="12" type="password" required />
+            </div>
+        </div> -->
+
         <div class="flex-container">
             <div class="container">
-            <a href="atm_credit.php" class="button">Add Money</a>
-              
+                <button type="submit">Submit</button>
             </div>
-            <div class="container">
-            <a href="atm_debit.php" class="button">Withdraw Money</a>
-            </div>
-            <div class="container">
-            <a href="atm_check_balance.php" class="button">Check Balance</a>
-            </div>
-            <div class="container">
-            <a href="atm_show_receipt.php" class="button">Show Receipt</a>
-            </div>
-            
-
-        </div>
-        <br> <br>
-        <div class="flex-container">
-            <!-- <div class="container">
-                <button class="button" type="submit">Submit</button>
-            </div> -->
 
             <div class="container">
-            <a href="atm_exit.php" class="button" onclick="return confirm('Are you sure?')">Exit</a>
-               
+                <button type="reset" class="reset" onclick="return confirmReset();">Reset</button>
             </div>
         </div>
 
     </form>
-    
 
     <script>
     function confirmReset() {

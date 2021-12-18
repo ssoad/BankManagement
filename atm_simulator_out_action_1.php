@@ -13,13 +13,13 @@
     $sql00 = "SELECT * from customer where card_no='".$card_no."'";
     $result00 = $conn->query($sql00);
     $row00 = $result00->fetch_assoc();
-    echo("<script>console.log('PHP: " . $sql00 . "');</script>");
     $id = $row00["cust_id"];
+    $_SESSION['cust_id'] = $id;
     $sql0 = "SELECT balance FROM passbook".$id." ORDER BY trans_id DESC LIMIT 1";
     $result = $conn->query($sql0);
     $row = $result->fetch_assoc();
     $balance = $row["balance"];
-
+    $trans_id = 0;
     /*  Set appropriate error number if errors are encountered.
         Key (for err_no) :
         -1 = Connection Error.
@@ -69,6 +69,11 @@
                         )";
 
                 if (($conn->query($sql1) === TRUE)) {
+                    $sql = "SELECT trans_id FROM passbook".$id." ORDER BY trans_id DESC LIMIT 1";
+                    $result = $conn->query($sql);
+                    $row_temp = $result->fetch_assoc();
+                    $trans_id = $row_temp['trans_id'];
+                    
                     $err_no = 0;
                 }
             }
@@ -80,6 +85,8 @@
     else {
         $err_no = 2;
     }
+
+  
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +122,16 @@
                 <p id="info"><?php echo "Wrong PIN Entered !\n"; ?></p>
             <?php } ?>
         </div>
+        <?php
+            if ($type == "debit") { ?>
+              <div class="flex-item">
+            <h3>Do you want Home Cash Delivery ? </h3>
+           
+            <a href="request_delivery.php?trans_id=<?php echo "$trans_id";?>" class="button">Yes</a>
+        </div>
 
+            <?php } ?>
+        
         <div class="flex-item">
             <a href="atm_simulator_out_1.php" class="button">Go Back</a>
         </div>

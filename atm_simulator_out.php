@@ -1,6 +1,9 @@
 <?php
     include "header.php";
     include "navbar.php";
+    include "connect.php";
+    session_start()
+
 ?>
 
 <!DOCTYPE html>
@@ -17,12 +20,12 @@
         </div>
 
 
-        <div class="flex-container">
+        <!-- <div class="flex-container">
             <div class=container>
                 <label>Enter Card Number :</label><br>
                 <input name="card_no" size="24" type="text" required />
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="flex-container">
             <div class=container>
@@ -46,6 +49,12 @@
                 </div>
             </div>
         </div> -->
+        <div class="flex-container">
+            <div class=container>
+                <center><h2>Welcome <?php echo $_SESSION['atm_name']; ?></h3><br></center>
+                <!-- <input name="amt" size="24" type="text" required /> -->
+            </div>
+        </div>
 
         <div class="flex-container">
             <div  class=container>
