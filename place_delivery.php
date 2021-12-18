@@ -26,7 +26,7 @@ if (($result->num_rows) > 0) {
     $deli_id = $row["id"];
     $sql1="INSERT INTO `delivery`(`cus_id`, `trans_id`, `mobile`,`address`, `deli_id`, `job_status`) 
     VALUES(".$id.",".$_GET['trans_id'].",'$mobile','$address',NULL,-1)";
-    $result = $conn->query($sql1);
+   
     if (($conn->query($sql1) === TRUE)) {
         $err_no = 0;
     }
@@ -39,7 +39,7 @@ $client->messages->create(
     [
         'from' => $twilio_number,
         "messagingServiceSid" => "MG0d50ed188ce17b75c054169370e5cedc",
-        'body' => 'Your Cash Delivery Request Successful'
+        'body' => 'Your Money Delivery Request is Placed Successfully'
     ] 
 );
 

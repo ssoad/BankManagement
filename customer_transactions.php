@@ -6,7 +6,6 @@
     }
 
     include "validate_customer.php";
-    include "connect.php";
     include "header.php";
     include "customer_navbar.php";
     include "customer_sidebar.php";

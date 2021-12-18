@@ -6,7 +6,6 @@
     }
 
     include "validate_customer.php";
-    include "connect.php";
     include "session_timeout.php";
 
     if (isset($_SESSION['auto_delete_benef'])) {

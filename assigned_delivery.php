@@ -1,8 +1,8 @@
 <?php
     
-    include "connect.php";
     include "header.php";
     include "session_timeout.php";
+    include "deliveryman_navbar.php";
     include "deliveryman_sidebar.php";
     session_start();
     $id = $_SESSION['loggedIn_deli_id'];
@@ -69,7 +69,7 @@
                         ?>  
                         </p>
                         <p id="acno"><?php 
-                         echo "Phone : " . $row00["phone_no"];
+                         echo "Phone : " . $row["mobile"];
                         echo "<br>Address : " . $row["address"]; 
                          if ($row["job_status"]==0) {
                             echo " ( Pending )";

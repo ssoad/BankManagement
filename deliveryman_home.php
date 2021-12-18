@@ -1,7 +1,7 @@
 <?php
     include "header.php";
     include "session_timeout.php";
-    include "connect.php";
+    include "deliveryman_navbar.php";
     include "deliveryman_sidebar.php";
 
     session_start();

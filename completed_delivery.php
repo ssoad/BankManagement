@@ -1,8 +1,9 @@
 <?php
     
-    include "connect.php";
+   
     include "header.php";
     include "session_timeout.php";
+    include "deliveryman_navbar.php";
     include "deliveryman_sidebar.php";
     session_start();
     $id = $_SESSION['loggedIn_deli_id'];

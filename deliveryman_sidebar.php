@@ -9,7 +9,7 @@
     <div class="sidenav" id="theSideNav">
         <a href="javascript:void(0)" id="closebtn" style="padding: 10px 20px;"
                         onclick="closeNav()">&times;</a>
-        <a href="customer_home.php">Home</a>
+        <a href="deliveryman_home.php">Home</a>
        
         <a id="label">Delivery</a>
         <a href="assigned_delivery.php">Assigned Delivery</a>

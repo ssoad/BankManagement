@@ -105,7 +105,7 @@
         </div>
 
         <div class="flex-item">
-            <a href="/atm_simulator.php" class="button">Go Back</a>
+            <a href="atm_simulator.php" class="button">Go Back</a>
         </div>
     </div>
 

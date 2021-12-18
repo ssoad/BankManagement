@@ -6,7 +6,6 @@
     }
 
     include "validate_customer.php";
-    include "connect.php";
     include "header.php";
     include "customer_navbar.php";
     include "customer_sidebar.php";
@@ -28,7 +27,7 @@
             $lname = $row["last_name"];
             $gender = $row["gender"];
             $dob = $row["dob"];
-            $aadhar = $row["nid_no"];
+            $nid = $row["nid_no"];
             $email = $row["email"];
             $phno = $row["phone_no"];
             $address = $row["address"];
@@ -78,7 +77,7 @@
 
         <div class="flex-container">
             <div class=container>
-                <label>Balance (INR) : <label id="info_label"><?php echo number_format($balance) ?></label></label>
+                <label>Balance (BDT) : <label id="info_label"><?php echo number_format($balance) ?></label></label>
             </div>
         </div>
 
@@ -104,7 +103,7 @@
 
         <div class="flex-container">
             <div class=container>
-                <label>Aadhar No : <label id="info_label"><?php echo $aadhar ?></label></label>
+                <label>NID No : <label id="info_label"><?php echo $nid ?></label></label>
             </div>
         </div>
 
@@ -156,7 +155,7 @@
                 <button type="submit">Update</button>
             </div>
             <div class="container">
-                <a href="/pass_change.php" class="password-button">Change Password/PIN</a>
+                <a href="pass_change.php" class="password-button">Change Password/PIN</a>
             </div>
         </div>
 
