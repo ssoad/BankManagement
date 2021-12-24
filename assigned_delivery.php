@@ -96,7 +96,7 @@
 
                             <?php
                                     if ($row["job_status"]==1) {?>
-                                <a href="complete_delivery.php?deli_id=<?php echo $row["id"] ?>"
+                                <a href="deliveryman_otp.php?deli_id=<?php echo $row["id"] ?>"
                                  onclick="return confirm('Are you sure?')">Complete</a>
                             <?php } ?>
                                  

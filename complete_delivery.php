@@ -5,11 +5,11 @@
         session_start();
     }
 
-    include "connect.php";
     include "deliveryman_navbar.php";
 
     if (isset($_GET['deli_id'])) {
-        $sql = "SELECT * FROM `delivery` WHERE id=".$_GET['deli_id'];
+        $otp = mysqli_real_escape_string($conn, $_POST["otp"]);
+        $sql = "SELECT * FROM `delivery` WHERE id=".$_GET['deli_id']." AND `otp`=".$otp;
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $mobile = $row['mobile'];

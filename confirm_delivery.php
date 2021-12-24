@@ -6,8 +6,6 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-include "connect.php";
-
 include "deliveryman_navbar.php";
 if (isset($_GET['deli_id'])) {
     $sql = "SELECT * FROM `delivery` WHERE id=".$_GET['deli_id'];

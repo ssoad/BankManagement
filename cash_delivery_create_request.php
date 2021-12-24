@@ -20,6 +20,7 @@
     $row = $result->fetch_assoc();
     $balance = $row["balance"];
     $trans_id = 0;
+    $otp = rand(1000,9999);
     /*  Set appropriate error number if errors are encountered.
         Key (for err_no) :
         -1 = Connection Error.
@@ -82,8 +83,8 @@ $row = $result->fetch_assoc();
 if (($result->num_rows) > 0) {
     $deli_id = $row["id"];
     $deli_phone = $row["phone"];
-    $sql1="INSERT INTO `delivery`(`cus_id`, `trans_id`, `mobile`,`address`, `deli_id`, `job_status`) 
-    VALUES(".$id.",".$trans_id.",'$mobile','$address',".$deli_id.",0)";
+    $sql1="INSERT INTO `delivery`(`cus_id`, `trans_id`, `mobile`,`address`, `deli_id`, `job_status`,`otp`) 
+    VALUES(".$id.",".$trans_id.",'$mobile','$address',".$deli_id.",0,".$otp.")";
     if (($conn->query($sql1) === TRUE)) {
         $err_no = 0;
     }
@@ -99,25 +100,26 @@ if (($result->num_rows) > 0) {
 
 // In production, these should be environment variables.
 // Below, substitute your cell phone
-// $client->messages->create(
-//     $mobile,  
-//     [
-//         'from' => $twilio_number,
-//         "messagingServiceSid" => "MG0d50ed188ce17b75c054169370e5cedc",
-//         'body' => 'Your Money Delivery Request is Placed Successfully'
-//     ] 
-// );
+$body = "Your Money Delivery Request is Placed Successfully and OTP is ".$otp."";
+$client->messages->create(
+    $mobile,  
+    [
+        'from' => $twilio_number,
+        "messagingServiceSid" => "MG0d50ed188ce17b75c054169370e5cedc",
+        'body' => $body
+    ] 
+);
 
 
-// $body = "New Request Placed! Phone:".$mobile." Address:".$address."";
-// $client->messages->create(
-//     $deli_phone,  
-//     [
-//         'from' => $twilio_number,
-//         "messagingServiceSid" => "MG0d50ed188ce17b75c054169370e5cedc",
-//         'body' => $body
-//     ] 
-// );
+$body = "New Request Placed! Phone:".$mobile." Address:".$address."";
+$client->messages->create(
+    $deli_phone,  
+    [
+        'from' => $twilio_number,
+        "messagingServiceSid" => "MG0d50ed188ce17b75c054169370e5cedc",
+        'body' => $body
+    ] 
+);
 
   
 ?>
