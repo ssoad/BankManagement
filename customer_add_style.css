@@ -183,6 +183,22 @@ button {
     cursor: pointer;
 }
 
+
+.button1 {
+    background-color: #d50000;
+    border: none;
+    color: #d50000;
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    padding: 14px 20px;
+    margin: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
 .password-button {
     background-color: transparent;
     color: #d50000;

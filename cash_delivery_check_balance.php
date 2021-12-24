@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex-item">
-            <a href="atm_simulator_out_1.php" class="button">Go Back</a>
+            <a href="cash_delivery_home_menu.php" class="button">Go Back</a>
         </div>
     </div>
 
